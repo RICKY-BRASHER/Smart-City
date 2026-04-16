@@ -14,8 +14,8 @@
 
   <style>
     :root {
-      --blue-primary: #3498DB;
-      --blue-dark:    #0D9488;
+      --blue-primary: #1a6fd4;
+      --blue-dark:    #1557b0;
       --blue-light:   #e8f1fc;
       --blue-mid:     #2d80e8;
       --accent:       #f0a500;
@@ -387,7 +387,7 @@
     }
     .step-number {
       width: 52px; height: 52px;
-      background: #2C3E50;
+      background: var(--blue-primary);
       color: #fff;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 800;
@@ -432,7 +432,7 @@
     .cta-band p { color: rgba(255,255,255,.8); font-size: 1rem; }
 
     .btn-cta {
-      background: #fff;
+      background: var(--accent);
       color: var(--text-dark);
       font-weight: 700;
       font-size: 1rem;
@@ -502,14 +502,14 @@
 <nav class="navbar-cityfix d-flex align-items-center justify-content-between">
   <a href="#" class="brand">
     <span class="brand-icon"><i class="bi bi-geo-alt-fill"></i></span>
-    Smart-City
+    CityFix
   </a>
   <div class="d-none d-md-flex align-items-center gap-1">
     <a href="#" class="nav-link-cf"><i class="bi bi-flag me-1"></i>Signaler un incident</a>
     <a href="#" class="nav-link-cf"><i class="bi bi-list-check me-1"></i>Mes Signalements</a>
     <div class="d-flex gap-2 ms-2">
-      <a href="{{ route('connexion') }}" class="btn btn-nav-outline">Connexion</a>
-      <a href="{{ route('inscrit') }}"  class="btn btn-nav-solid">Inscription</a>
+      <a href="#" class="btn btn-nav-outline">Connexion</a>
+      <a href="#" class="btn btn-nav-solid">Inscription</a>
     </div>
   </div>
   <button class="btn d-md-none" style="color:#fff;font-size:1.4rem;border:none;" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
@@ -520,15 +520,15 @@
 <!-- Mobile menu -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
   <div class="offcanvas-header" style="background:var(--blue-primary)">
-    <span class="brand text-white" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800"><i class="bi bi-geo-alt-fill me-2"></i>Smart-City</span>
+    <span class="brand text-white" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800"><i class="bi bi-geo-alt-fill me-2"></i>CityFix</span>
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body d-flex flex-column gap-3 pt-4">
     <a href="#" class="text-decoration-none fw-600" style="color:var(--blue-primary)"><i class="bi bi-flag me-2"></i>Signaler un incident</a>
     <a href="#" class="text-decoration-none fw-600" style="color:var(--blue-primary)"><i class="bi bi-list-check me-2"></i>Mes Signalements</a>
     <hr/>
-    <a href="{{ route('connexion') }" class="btn" style="background:var(--blue-primary);color:#fff;font-weight:700;border-radius:10px">Connexion</a>
-    <a href="{{ route('inscrit') }" class="btn" style="background:var(--blue-light);color:var(--blue-primary);font-weight:700;border-radius:10px">Inscription</a>
+    <a href="#" class="btn" style="background:var(--blue-primary);color:#fff;font-weight:700;border-radius:10px">Connexion</a>
+    <a href="#" class="btn" style="background:var(--blue-light);color:var(--blue-primary);font-weight:700;border-radius:10px">Inscription</a>
   </div>
 </div>
 
@@ -546,7 +546,7 @@
         </div>
         <h1>Signalez les <span>Dégradations</span><br>Urbaines facilement</h1>
         <p class="hero-subtitle">
-          Aidez à maintenir la ville en bon état en signalant les problèmes autour de vous via notre plateforme <strong>Smart-city</strong>. Rapide, simple et efficace.
+          Aidez à maintenir la ville en bon état en signalant les problèmes autour de vous via notre plateforme <strong>CityFix</strong>. Rapide, simple et efficace.
         </p>
         <div class="hero-actions">
           <a href="#" class="btn-hero-primary">
@@ -614,8 +614,8 @@
     <div class="row g-4 justify-content-center">
       <div class="col-6 col-md-4 col-lg-2 reveal reveal-d1">
         <div class="cat-card h-100">
-            <div class="cat-icon">🛣 </div>
-          <div class="cat-name">Etat Routier</div>
+            <div class="cat-icon">🕳️</div>
+          <div class="cat-name">Nid-de-poule</div>
           <div class="cat-count">248 signalements</div>
         </div>
       </div>
@@ -645,13 +645,6 @@
           <div class="cat-icon">🌲</div>
           <div class="cat-name">Espaces verts</div>
           <div class="cat-count">56 signalements</div>
-        </div>
-      </div>
-      <div class="col-6 col-md-4 col-lg-2 reveal reveal-d5">
-        <div class="cat-card h-100">
-          <div class="cat-icon">🚨</div>
-          <div class="cat-name">Incidents</div>
-          <div class="cat-count">139 signalements</div>
         </div>
       </div>
     </div>
@@ -692,7 +685,7 @@
           <div class="d-flex flex-column gap-3 flex-grow-1">
             <div class="step-card">
               <h5><i class="bi bi-camera text-primary me-2"></i>Photographiez le problème</h5>
-              <p>Prenez une photo et décrivez le problème que vous observez dans votre quartier.</p>
+              <p>Prenez une photo ou décrivez le problème que vous observez dans votre quartier.</p>
             </div>
             <div class="step-card">
               <h5><i class="bi bi-geo-alt text-primary me-2"></i>Localisez l'incident</h5>
@@ -714,8 +707,8 @@
   <div class="container">
     <div class="row align-items-center g-4">
       <div class="col-lg-7 reveal">
-        <h2>Rejoignez Nous sur Smart-City</h2>
-        <p class="mt-2 mb-0">Plus de <strong style="color:#fff">500 citoyens</strong> ont déjà amélioré leur ville grâce à leurs signalements. C'est votre tour.</p>
+        <h2>Rejoignez la communauté CityFix</h2>
+        <p class="mt-2 mb-0">Plus de <strong style="color:#fff">5 000 citoyens</strong> ont déjà amélioré leur ville grâce à leurs signalements. C'est votre tour.</p>
       </div>
       <div class="col-lg-5 text-lg-end reveal reveal-d2">
         <a href="#" class="btn-cta">
@@ -734,7 +727,7 @@
       <div class="col-md-4">
         <a href="#" class="brand d-flex align-items-center gap-2 mb-3">
           <span class="brand-icon" style="background:var(--blue-primary);color:#fff"><i class="bi bi-geo-alt-fill"></i></span>
-          S-C
+          CityFix
         </a>
         <p style="font-size:.85rem;line-height:1.7">La plateforme citoyenne pour signaler et suivre les problèmes urbains.</p>
       </div>

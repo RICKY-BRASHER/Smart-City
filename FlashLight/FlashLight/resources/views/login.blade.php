@@ -102,12 +102,11 @@
         .card {
             position: relative; z-index: 10;
             width: 100%;
-            max-width: clamp(500px, 92vw, 640px);
+            max-width: clamp(300px, 92vw, 440px);
             background: var(--surface);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-card);
             overflow: hidden;
-            display: flex;
             animation: popIn .55s cubic-bezier(.34,1.45,.64,1) both;
         }
         @keyframes popIn {
@@ -120,12 +119,10 @@
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             padding: var(--sp-md) var(--sp-lg);
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             gap: var(--sp-sm);
             position: relative; overflow: hidden;
-            width: 40%; flex-shrink: 0;
         }
 
         .logo-row { display: flex; align-items: center; gap: var(--sp-xs); position: relative; z-index: 1; flex-shrink: 0; }
@@ -139,11 +136,11 @@
         .logo-icon:hover { transform: scale(1.08); background: rgba(255,255,255,.22); }
         .logo-name { font-size: clamp(15px, 3.5vw, 19px); font-weight: 800; color: #fff; letter-spacing: -.4px; white-space: nowrap; }
 
-        .head-tagline { position: relative; z-index: 1; text-align: center; min-width: 0; }
+        .head-tagline { position: relative; z-index: 1; text-align: right; min-width: 0; }
         .head-tagline p { font-size: var(--fs-xs); color: rgba(255,255,255,.62); line-height: 1.45; font-weight: 500; }
 
         /*Body*/
-        .card-body { padding: var(--sp-lg) var(--sp-lg) var(--sp-md); display: flex; flex-direction: column; justify-content: center; align-items: stretch; width: 60%; }
+        .card-body { padding: var(--sp-lg) var(--sp-lg) var(--sp-md); }
 
         .section-title { font-size: var(--fs-md); font-weight: 800; letter-spacing: -.4px; color: var(--text); margin-bottom: 3px; }
         .section-sub   { font-size: var(--fs-xs); color: var(--muted); margin-bottom: var(--sp-md); }
@@ -216,10 +213,7 @@
         }
         .eye-btn:hover { color: var(--primary); }
         .eye-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
-        .invalid-feedback-cf {
-            font-size: 11.5px; color: var(--danger);
-            margin-top: 4px; display: flex; align-items: center; gap: 3px;
-        }
+
         .invalid-msg {
             display: flex; align-items: center; gap: 5px;
             font-size: var(--fs-xs); color: var(--danger); margin-top: 5px;
@@ -393,13 +387,12 @@
 
         <!-- Header band -->
         <header class="card-head">
-            
             <div class="logo-row">
                 <div class="logo-icon" aria-hidden="true"><i class="bi bi-geo-alt-fill"></i></div>
-                <span class="logo-name">Smart-City</span>
+                <span class="logo-name">CityFix</span>
             </div>
             <div class="head-tagline" aria-hidden="true">
-                <p>Signalez &amp; résolvez<br>les problèmes urbains que vous rencontrer</p>
+                <p>Signalez &amp; résolvez<br>les problèmes urbains</p>
             </div>
         </header>
 
@@ -423,8 +416,9 @@
             @endif --}}
 
             <!-- Form -->
-            <form id="loginForm" novalidate>
-                @csrf
+            <form id="loginForm" novalidate
+                {{-- method="POST" action="{{ route('login') }}" --}}>
+                {{-- @csrf --}}
 
                 <!-- Email -->
                 <div class="field-group">
@@ -435,7 +429,7 @@
                         <i class="bi bi-envelope input-icon" aria-hidden="true"></i>
                         <input
                             type="email" id="email" name="email"
-                            class="form-input form-control-cf @error('password') is-invalid @enderror"
+                            class="form-input"
                             placeholder="exemple@email.com"
                             autocomplete="email"
                             inputmode="email"
@@ -443,9 +437,10 @@
                             aria-describedby="email-error"
                         >
                     </div>
-                    @error('email')
-                        <div class="invalid-feedback-cf"><i class="bi bi-exclamation-circle-fill"></i> {{ $message }}</div>
-                    @enderror
+                    <div id="email-error" class="invalid-msg" role="alert" hidden>
+                        <i class="bi bi-exclamation-circle-fill" aria-hidden="true"></i>
+                        <span></span>
+                    </div>
                 </div>
 
                 <!-- Password -->
@@ -458,7 +453,7 @@
                         <i class="bi bi-lock input-icon" aria-hidden="true"></i>
                         <input
                             type="password" id="password" name="password"
-                            class="form-input form-control-cf @error('password') is-invalid @enderror"
+                            class="form-input"
                             placeholder="••••••••"
                             autocomplete="current-password"
                             required aria-required="true"
@@ -471,9 +466,10 @@
                             <i class="bi bi-eye" aria-hidden="true"></i>
                         </button>
                     </div>
-                    @error('password')
-                        <div class="invalid-feedback-cf"><i class="bi bi-exclamation-circle-fill"></i> {{ $message }}</div>
-                    @enderror
+                    <div id="password-error" class="invalid-msg" role="alert" hidden>
+                        <i class="bi bi-exclamation-circle-fill" aria-hidden="true"></i>
+                        <span></span>
+                    </div>
                 </div>
 
                 <!-- Remember -->
@@ -485,8 +481,7 @@
                 </div>
 
                 <!-- Submit -->
-                <div  style="text-align: center;  justify-content: center; margin-bottom: 5px; color:red; font-size: 13px; display:none;" id="erreur"><i class="bi bi-exclamation-circle-fill"></i> <span id="msg"></span></div>
-                <button type="button" class="btn-submit" id="submitBtn">
+                <button type="submit" class="btn-submit" id="submitBtn">
                     <span id="btnText">Se connecter</span>
                     <span class="spinner" id="btnSpinner" aria-hidden="true"></span>
                 </button>
@@ -511,7 +506,7 @@
             <!-- Register link -->
             <div class="card-footer-row">
                 Pas encore de compte&nbsp;?
-                <a href="{{ route('inscrit') }}">Inscrivez-vous</a>
+                <a href="#">Inscrivez-vous</a>
             </div>
 
             <!-- Feature badges -->
@@ -523,7 +518,7 @@
 
         </div>
     </main>
-    <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+
     <script>
         /* ── Toggle password ── */
         function togglePwd(btn) {
@@ -535,6 +530,59 @@
             btn.setAttribute('aria-label', showing ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
         }
 
+        /* ── Ripple factory ── */
+        function ripple(el, e, color) {
+            const rect = el.getBoundingClientRect();
+            const s    = Math.max(rect.width, rect.height);
+            const r    = Object.assign(document.createElement('span'), { className: 'ripple' });
+            r.style.cssText = `
+                width:${s}px;height:${s}px;
+                left:${e.clientX - rect.left - s/2}px;
+                top:${e.clientY  - rect.top  - s/2}px;
+                background:${color};
+            `;
+            el.appendChild(r);
+            r.addEventListener('animationend', () => r.remove(), { once: true });
+        }
+
+        document.querySelector('.btn-submit').addEventListener('pointerdown', e =>
+            ripple(e.currentTarget, e, 'rgba(255,255,255,.25)'));
+
+        document.querySelectorAll('.btn-social').forEach(btn =>
+            btn.addEventListener('pointerdown', e => ripple(btn, e, 'rgba(26,86,219,.08)')));
+
+        /* ── Validation messages ── */
+        const MSGS = {
+            email:    { valueMissing: 'L\'adresse e-mail est requise.',          typeMismatch: 'Veuillez saisir une adresse e-mail valide.' },
+            password: { valueMissing: 'Le mot de passe est requis.' },
+        };
+
+        function showErr(input, msg) {
+            const el = document.getElementById(input.id + '-error');
+            if (!el) return;
+            input.classList.add('is-invalid');
+            input.setAttribute('aria-invalid', 'true');
+            el.querySelector('span').textContent = msg;
+            el.hidden = false;
+        }
+        function clearErr(input) {
+            const el = document.getElementById(input.id + '-error');
+            if (!el) return;
+            input.classList.remove('is-invalid');
+            input.removeAttribute('aria-invalid');
+            el.hidden = true;
+        }
+        function validate(input) {
+            const m = MSGS[input.id] || {};
+            if (input.validity.valueMissing) { showErr(input, m.valueMissing  || 'Champ requis.');    return false; }
+            if (input.validity.typeMismatch) { showErr(input, m.typeMismatch  || 'Format invalide.'); return false; }
+            clearErr(input); return true;
+        }
+
+        document.querySelectorAll('.form-input').forEach(inp => {
+            inp.addEventListener('blur',  ()  => validate(inp));
+            inp.addEventListener('input', ()  => { if (inp.classList.contains('is-invalid')) validate(inp); });
+        });
 
         /* ── Submit ── */
         document.getElementById('loginForm').addEventListener('submit', function (e) {
@@ -548,66 +596,6 @@
             document.getElementById('btnSpinner').style.display = 'block';
             btn.disabled = true;
             // In Laravel: remove e.preventDefault() and let the form POST
-        });
-        $(document).ready(function() {
-            $('#submitBtn').on('click', function(e) {
-            
-                e.preventDefault();
-                let btn = $(this);
-                let btnText = $('#btnText');
-                let btnSpinner = $('#btnSpinner');
-
-                btn.prop('disabled', true);
-                btnSpinner.removeClass('d-none');
-                btnText.text('Traitement...');
-            
-                $('.invalid-feedback-cf').remove(); // Supprime tous les anciens messages d'erreur
-                $('.form-control-cf').removeClass('is-invalid');
-
-                var formData = new FormData($('#loginForm')[0]);
-                $.ajax({
-                    url: "{{ route('valid_connexion') }}",
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        if(response.success){
-                            $('#btnText').text('Succès ! Redirection…');
-                            $('#btnSpinner').addClass('d-none');
-                            setTimeout(function() {
-                                window.location.replace(response.redirect);
-                            }, 2000);
-                        }
-                    },
-                    error: function(xhr) {
-                        btn.prop('disabled', false);
-                        btnSpinner.addClass('d-none');
-                        btnText.text('Se Connecter');
-                        if(xhr.status === 422){
-                            let errors = xhr.responseJSON.errors;
-                            $.each(errors, function(key, value) {
-                                // On trouve l'input correspondant
-                                let input = $('#' + key);
-                                
-                                // Ajout de la classe rouge à l'input
-                                input.addClass('is-invalid');
-                                
-                                // Insertion du message d'erreur juste après le wrapper de l'input
-                                input.closest('.field-group').append(
-                                    '<div class="invalid-feedback-cf"><i class="bi bi-exclamation-circle-fill"></i> ' + value[0] + '</div>'
-                                );
-                            });
-                        }
-                        if(xhr.status === 401){
-                            $('#erreur').css('display', 'flex');
-                            $('#msg').text('Identifiants invalides. Veuillez réessayer.');
-                        }
-                        
-                    }
-                });
-                
-            });
         });
     </script>
 </body>

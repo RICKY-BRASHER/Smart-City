@@ -1,0 +1,1 @@
+FlashLight/resources/views/inscription.blade.php
