@@ -137,10 +137,11 @@
                 progress: 'progress',
                 resolved: 'resolved'
             };
-
+            // Create marker and bind popup
             const marker = L.marker([incident.lat, incident.lng], {
                 icon: htmlIcon
             });
+        
             marker.bindPopup(`
         <div class="cf-popup">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
@@ -165,11 +166,58 @@
         }
 
         // ─── Map instances
-        let mainMapInstance = null;
+        var mainMapInstance = null;
         let miniMapInstance = null;
         let profileMapInstance = null;
 
+        // --- Carte Accueil (Mini)
         function initMiniMap() {
+            const el = document.getElementById('miniMap');
+            if (!el || miniMapInstance) return; // Si la div n'existe pas, on sort
+
+            miniMapInstance = L.map('miniMap', {
+                center: [4.0510, 9.6980],
+                zoom: 14,
+                zoomControl: false,
+                attributionControl: false
+            });
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(miniMapInstance);
+            
+            setTimeout(() => miniMapInstance.invalidateSize(), 400);
+        }
+
+        // --- Carte Principale (Grande)
+        function initMainMap() {
+            const el = document.getElementById('mainMap');
+            if (!el || mainMapInstance) return;
+
+            mainMapInstance = L.map('mainMap', {
+                center: [4.0560, 9.7080],
+                zoom: 13
+            });
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mainMapInstance);
+            
+            // On force le rafraîchissement complet
+            setTimeout(() => {
+                mainMapInstance.invalidateSize(true);
+            }, 600);
+        }
+
+        // --- Carte Profil
+        function initProfileMap() {
+            const el = document.getElementById('profileMap');
+            if (!el || profileMapInstance) return;
+
+            profileMapInstance = L.map('profileMap', {
+                center: [4.0510, 9.6980],
+                zoom: 14
+            });
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(profileMapInstance);
+            
+            setTimeout(() => profileMapInstance.invalidateSize(), 400);
+        }
+
+        /*function initMiniMap() {
             if (miniMapInstance) return;
             miniMapInstance = L.map('miniMap', {
                 center: [4.0510, 9.6980],
@@ -186,8 +234,9 @@
             incidents.slice(0, 4).forEach(i => makeMarker(i).addTo(miniMapInstance));
             setTimeout(() => miniMapInstance.invalidateSize(), 300);
         }
-
+        // ─── Main map with all incidents
         function initMainMap() {
+            
             if (mainMapInstance) return;
             mainMapInstance = L.map('mainMap', {
                 center: [4.0560, 9.7080],
@@ -200,7 +249,7 @@
                 attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(mainMapInstance);
             incidents.forEach(i => makeMarker(i).addTo(mainMapInstance));
-            setTimeout(() => mainMapInstance.invalidateSize(), 300);
+            setTimeout(() => mainMapInstance.invalidateSize(), 500);
         }
 
         function initProfileMap() {
@@ -221,7 +270,7 @@
             // Add only user's incidents (first 3 for demo)
             incidents.slice(0, 3).forEach(i => makeMarker(i).addTo(profileMapInstance));
             setTimeout(() => profileMapInstance.invalidateSize(), 300);
-        }
+        }*/
 
         // ─── Sidebar Toggle 
         const sidebar = document.getElementById('sidebar');
@@ -254,7 +303,7 @@
         overlay.addEventListener('click', closeMobileSidebar);
 
         // ─── Navigation 
-        function goTo(section) {
+        /*function goTo(section) {
             document.querySelectorAll('.nav-link-cf').forEach(l => l.classList.remove('active'));
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
 
@@ -277,14 +326,14 @@
 
             // Close mobile sidebar on navigation
             if (window.innerWidth < 992) closeMobileSidebar();
-        }
+        }*/ 
 
-        document.querySelectorAll('.nav-link-cf').forEach(link => {
+        /*document.querySelectorAll('.nav-link-cf').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 goTo(this.getAttribute('data-section'));
             });
-        });
+        });*/
 
         // Dark Mode Toggle
         function toggleDarkMode(isDark) {
@@ -399,8 +448,19 @@
             container.appendChild(toastEl);
             setTimeout(() => toastEl.remove(), 4000);
         }
+        window.addEventListener('load', function() {
+            if (document.getElementById('miniMap')) {
+                initMiniMap();
+            }
+            if (document.getElementById('mainMap')) {
+                initMainMap();
+            }
+            if (document.getElementById('profileMap')) {
+                initProfileMap();
+            }
+        });
 
         // ─── Init mini map on load (accueil is default)
-        window.addEventListener('load', () => {
+        /*window.addEventListener('load', () => {
             setTimeout(initMiniMap, 200);
-        });
+        });*/

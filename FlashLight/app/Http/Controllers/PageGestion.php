@@ -8,19 +8,19 @@ class PageGestion extends Controller
 {
     function Inscription()
     {
-        return view('inscript_city');
+        return view('Layout.inscript_city');
     }
     function connexion()
     {
-        return view('login');
+        return view('Layout.login');
     }
     function admin()
     {
-        return view('admin');
+        return view('admin.admin');
     }
     function users()
     {
-        return view('users');
+        return view('Client.home');
     }
 
 }

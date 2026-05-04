@@ -29,12 +29,32 @@ Route::post('/connect_city',  [Process::class, 'connexion'])->name('valid_connex
 Route::post('/control',       [Process::class, 'verifycode'])->name('valid_verif_code');
 Route::post('/rscode',        [Process::class, 'renvoyercode'])->name('resend_code');
 
-
+Route::get('/admin', [PageGestion::class, 'admin'])->name('admin');
+Route::get('/user', [PageGestion::class, 'user'])->name('user');
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin', [PageGestion::class, 'admin'])->name('admin');
-
-    // Ajoute ici tes autres routes protégées...
+    
+ 
+    // Ajoute ici tes autres routes protégées... 
 });
+// Routes pour les pages client
+Route::get('/signaler', function () {
+    return view('Client.signalement');
+})->name('signaler');
+Route::get('/home', function () {
+    return view('Client.home');
+})->name('home');
+Route::get('/carte_user', function () {
+    return view('Client.carte_u');
+})->name('carte_user');
+Route::get('/liste_signalements', function () {
+    return view('Client.liste_signal');
+})->name('mes_signalements');
+Route::get('/profil_user', function () {
+    return view('Client.profil_u');
+})->name('profil_u');
+Route::get('notif', function () {
+    return view('Client.notif');
+})->name('notif');
 
 
 
