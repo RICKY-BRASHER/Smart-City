@@ -39,136 +39,173 @@
                             </div>
                         </div>
 
-                        <div class="mb-4">
-                            <label class="form-label">Catégorie du problème <span
-                                    style="color:var(--red)">*</span></label>
-                            <div class="row g-2">
-                                <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                    <div class="cat-select-card selected"
-                                        style="border:2px solid var(--blue);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:var(--blue-xlight);transition:all .2s">
-                                        <div style="font-size:1.5rem;margin-bottom:.3rem">🕳️</div>
-                                        <div style="font-size:.78rem;font-weight:700;color:var(--blue)">
-                                            Nid-de-poule</div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                    <div class="cat-select-card"
-                                        style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
-                                        <div style="font-size:1.5rem;margin-bottom:.3rem">💡</div>
-                                        <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
-                                            Éclairage</div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                    <div class="cat-select-card"
-                                        style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
-                                        <div style="font-size:1.5rem;margin-bottom:.3rem">🗑️</div>
-                                        <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
-                                            Ordures</div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                    <div class="cat-select-card"
-                                        style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
-                                        <div style="font-size:1.5rem;margin-bottom:.3rem">💧</div>
-                                        <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
-                                            Fuite d'eau</div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                    <div class="cat-select-card"
-                                        style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
-                                        <div style="font-size:1.5rem;margin-bottom:.3rem">🌲</div>
-                                        <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
-                                            Espaces verts</div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                    <div class="cat-select-card"
-                                        style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
-                                        <div style="font-size:1.5rem;margin-bottom:.3rem">⚡</div>
-                                        <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
-                                            Autre</div>
-                                    </div>
+                       <form action="">
+                            @csrf
+                            <div class="mb-4">
+                                <label class="form-label">Catégorie du problème <span
+                                        style="color:var(--red)">*</span></label>
+                                <div class="row ">
+                                    <label >
+                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
+                                
+                                            <input type="radio" name="categorie" class="d-none" />
+                                            <div class="cat-select-card selected"
+                                                style="border:2px solid var(--blue);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:var(--blue-xlight);transition:all .2s">
+                                                <div style="font-size:1.5rem;margin-bottom:.3rem">🛣 </div>
+                                                <div style="font-size:.78rem;font-weight:700;color:var(--blue)">
+                                                    Etat Routier</div>
+                                            </div>
+                                            
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
+                                            <input type="radio" name="categorie" class="d-none" />
+                                            <div class="cat-select-card"
+                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
+                                                <div style="font-size:1.5rem;margin-bottom:.3rem">💡</div>
+                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
+                                                    Éclairage</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
+                                            <input type="radio" name="categorie" class="d-none" />
+                                            <div class="cat-select-card"
+                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
+                                                <div style="font-size:1.5rem;margin-bottom:.3rem">🗑️</div>
+                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
+                                                    Ordures</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
+                                            <input type="radio" name="categorie" class="d-none" />
+                                            <div class="cat-select-card"
+                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
+                                                <div style="font-size:1.5rem;margin-bottom:.3rem">💧</div>
+                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
+                                                    Fuite d'eau</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
+                                            <input type="radio" name="categorie" class="d-none" />
+                                            <div class="cat-select-card"
+                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
+                                                <div style="font-size:1.5rem;margin-bottom:.3rem">🌲</div>
+                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
+                                                    Espaces verts</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
+                                            <input type="radio" name="categorie" class="d-none" />
+                                            <div class="cat-select-card"
+                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
+                                                <div style="font-size:1.5rem;margin-bottom:.3rem">🚨</div>
+                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
+                                                    Incidents</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
+                                            <input type="radio" name="categorie" class="d-none" />
+                                            <div class="cat-select-card"
+                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
+                                                <div style="font-size:1.5rem;margin-bottom:.3rem">⚡</div>
+                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
+                                                    Autre</div>
+                                            </div>
+                                        </div>
+                                    </label>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Titre du signalement <span
-                                    style="color:var(--red)">*</span></label>
-                            <input type="text" class="form-control"
-                                placeholder="Ex : Nid-de-poule dangereux devant l'école" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Description <span
-                                    style="color:var(--red)">*</span></label>
-                            <textarea class="form-control"
-                                placeholder="Décrivez le problème en détail : taille, danger, depuis combien de temps…"></textarea>
-                        </div>
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Quartier <span
+                            <div class="mb-3">
+                                <label class="form-label">Titre du signalement <span
                                         style="color:var(--red)">*</span></label>
-                                <select class="form-select">
-                                    <option>Akwa</option>
-                                    <option>Bepanda</option>
-                                    <option>New Bell</option>
-                                    <option>Bonamoussadi</option>
-                                    <option>Deido</option>
-                                    <option>Ndokotti</option>
-                                </select>
+                                <input type="text" class="form-control" name="title"
+                                    placeholder="Ex : Nid-de-poule dangereux devant l'école" />
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Rue / Adresse <span
+                            <div class="mb-3">
+                                <label class="form-label">Description <span
                                         style="color:var(--red)">*</span></label>
-                                <input type="text" class="form-control" placeholder="Ex : Rue Joss" />
+                                <textarea class="form-control" name="description"
+                                    placeholder="Décrivez le problème en détail : taille, danger, depuis combien de temps…"></textarea>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Niveau d'urgence</label>
-                            <div class="d-flex gap-2">
-                                <label style="flex:1;cursor:pointer">
-                                    <input type="radio" name="urgence" class="d-none" />
-                                    <div class="urgence-opt"
-                                        style="border:2px solid var(--border);border-radius:10px;padding:.55rem;text-align:center;font-size:.78rem;font-weight:700;color:var(--green);background:#fff;cursor:pointer;transition:all .2s"
-                                        onclick="selectUrgence(this,'green','#16a34a')">🟢 Basse</div>
-                                </label>
-                                <label style="flex:1;cursor:pointer">
-                                    <input type="radio" name="urgence" class="d-none" />
-                                    <div class="urgence-opt"
-                                        style="border:2px solid var(--border);border-radius:10px;padding:.55rem;text-align:center;font-size:.78rem;font-weight:700;color:var(--orange);background:#fff;cursor:pointer;transition:all .2s"
-                                        onclick="selectUrgence(this,'orange','#ea580c')">🟡 Moyenne</div>
-                                </label>
-                                <label style="flex:1;cursor:pointer">
-                                    <input type="radio" name="urgence" class="d-none" />
-                                    <div class="urgence-opt selected-urgence"
-                                        style="border:2px solid var(--red);border-radius:10px;padding:.55rem;text-align:center;font-size:.78rem;font-weight:700;color:var(--red);background:var(--red-light);cursor:pointer;transition:all .2s"
-                                        onclick="selectUrgence(this,'red','#dc2626')">🔴 Haute</div>
-                                </label>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Quartier <span
+                                            style="color:var(--red)">*</span></label>
+                                    <select class="form-select" name="quartier">
+                                        <option>Akwa</option>
+                                        <option>Bepanda</option>
+                                        <option>New Bell</option>
+                                        <option>Bonamoussadi</option>
+                                        <option>Deido</option>
+                                        <option>Ndokotti</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Rue / Adresse <span
+                                            style="color:var(--red)">*</span></label>
+                                    <input type="text" class="form-control" name="adresse" placeholder="Ex : Rue Joss" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label">Photo(s) du problème</label>
-                            <div class="upload-zone" onclick="showToast('info','Fonctionnalité à venir !')">
-                                <i class="bi bi-cloud-arrow-up"></i>
-                                <p style="font-weight:700;margin-bottom:.2rem;color:var(--text-mid)">
-                                    Glissez
-                                    vos photos ici</p>
-                                <p>ou <span style="color:var(--blue);font-weight:600;cursor:pointer">parcourez
-                                        vos fichiers</span></p>
-                                <p style="margin-top:.4rem;font-size:.72rem">JPG, PNG · Max 5 Mo · 3 photos
-                                    max</p>
+                            <div class="mb-3">
+                                <label class="form-label">Niveau d'urgence</label>
+                                <div class="d-flex gap-2">
+                                    <label style="flex:1;cursor:pointer">
+                                        <input type="radio" name="urgence" class="d-none" />
+                                        <div class="urgence-opt"
+                                            style="border:2px solid var(--border);border-radius:10px;padding:.55rem;text-align:center;font-size:.78rem;font-weight:700;color:var(--green);background:#fff;cursor:pointer;transition:all .2s"
+                                            onclick="selectUrgence(this,'green','#16a34a')">🟢 Basse</div>
+                                    </label>
+                                    <label style="flex:1;cursor:pointer">
+                                        <input type="radio" name="urgence" class="d-none" />
+                                        <div class="urgence-opt"
+                                            style="border:2px solid var(--border);border-radius:10px;padding:.55rem;text-align:center;font-size:.78rem;font-weight:700;color:var(--orange);background:#fff;cursor:pointer;transition:all .2s"
+                                            onclick="selectUrgence(this,'orange','#ea580c')">🟡 Moyenne</div>
+                                    </label>
+                                    <label style="flex:1;cursor:pointer">
+                                        <input type="radio" name="urgence" class="d-none" checked/>
+                                        <div class="urgence-opt selected-urgence"
+                                            style="border:2px solid var(--red);border-radius:10px;padding:.55rem;text-align:center;font-size:.78rem;font-weight:700;color:var(--red);background:var(--red-light);cursor:pointer;transition:all .2s"
+                                            onclick="selectUrgence(this,'red','#dc2626')">🔴 Haute</div>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-end gap-2">
-                            <button class="btn btn-light"
-                                style="border-radius:10px;font-weight:600;font-family:inherit">Annuler</button>
-                            <button class="btn-report"
-                                onclick="showToast('success','Signalement envoyé avec succès !')">
-                                <i class="bi bi-send-fill"></i> Envoyer le signalement
-                            </button>
-                        </div>
+                            <div class="mb-4">
+                                <label class="form-label">Photo(s) du problème</label>
+                                <input type="file" id="photoInput" name="photos[]" multiple accept="image/*" class="d-none">
+                                <div class="upload-zone" id="dropZone">
+                                    <i class="bi bi-cloud-arrow-up"></i>
+                                    <p style="font-weight:700;margin-bottom:.2rem;color:var(--text-mid)" id="uploadText">
+                                        Glissez
+                                        vos photos ici</p>
+                                    <p>ou <span style="color:var(--blue);font-weight:600;cursor:pointer">parcourez
+                                            vos fichiers</span></p>
+                                    <p style="margin-top:.4rem;font-size:.72rem">JPG, PNG · Max 5 Mo · 3 photos
+                                        max</p>
+                                        <!-- Conteneur pour la prévisualisation -->
+                                    <div id="previewContainer" class="d-flex gap-3 flex-wrap mt-3"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end gap-2">
+                                <button class="btn btn-light"
+                                    style="border-radius:10px;font-weight:600;font-family:inherit">Annuler</button>
+                                <button class="btn-report" type="button"
+                                    onclick="showToast('success','Signalement envoyé avec succès !')">
+                                    <i class="bi bi-send-fill"></i> Envoyer le signalement
+                                </button>
+                            </div>
+                       </form>
                     </div>
                 </div>
             </div>
@@ -254,3 +291,80 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        let selectedFiles = []; // Tableau pour stocker nos fichiers localement
+
+        $('#dropZone').click(function() {
+            $('#photoInput').click();
+        });
+
+        $('#photoInput').change(function(e) {
+            let files = Array.from(e.target.files);
+            
+            // Vérification du nombre total
+            if (selectedFiles.length + files.length > 3) {
+                showToast('danger', 'Maximum 3 photos autorisées !');
+                return;
+            }
+
+            files.forEach(file => {
+                selectedFiles.push(file); // Ajouter au tableau global
+                
+                let reader = new FileReader();
+                reader.onload = function(event) {
+                    let index = selectedFiles.length - 1;
+                    // Générer le HTML de la vignette avec le bouton supprimer
+                    let html = `
+                        <div class="position-relative preview-item" data-index="${index}">
+                            <img src="${event.target.result}" style="width:80px;height:80px;object-fit:cover;border-radius:10px;border:2px solid var(--blue)">
+                            <button type="button" class="btn-remove-photo" onclick="removePhoto(${index})" 
+                                style="position:absolute;top: 2px;right: -2px;color:white;border:none;border-radius:50%;width:12px;height:12px;font-size:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.2)">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>`;
+                    $('#previewContainer').append(html);
+                }
+                reader.readAsDataURL(file);
+            });
+            
+            updateInputFiles(); // Mettre à jour l'input réel
+        });
+
+        // Fonction pour supprimer une photo
+        function removePhoto(index) {
+            selectedFiles.splice(index, 1); // Retirer du tableau
+            renderPreviews(); // Redessiner les vignettes
+            updateInputFiles(); // Mettre à jour l'input réel
+        }
+
+        // Redessiner toutes les vignettes pour mettre à jour les index
+        function renderPreviews() {
+            $('#previewContainer').html('');
+            selectedFiles.forEach((file, index) => {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#previewContainer').append(`
+                        <div class="position-relative" data-index="${index}">
+                            <img src="${e.target.result}" style="width:80px;height:80px;object-fit:cover;border-radius:10px;border:2px solid var(--blue)">
+                            <button type="button" onclick="removePhoto(${index})" style="position:absolute;top: 3px;right: 5px;color:white;border:none;border-radius:50%;width:12px;height:12px;font-size:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.2)">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>`);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // ASTUCE : Synchroniser le tableau JS avec l'input HTML file
+        function updateInputFiles() {
+            const dataTransfer = new DataTransfer();
+            selectedFiles.forEach(file => dataTransfer.items.add(file));
+            document.getElementById('photoInput').files = dataTransfer.files;
+            
+            // Mettre à jour le texte d'aide
+            $('#uploadText').text(selectedFiles.length > 0 ? `${selectedFiles.length} photo(s) prête(s)` : "Glissez vos photos ici");
+        }
+
+    </script>
+@endpush

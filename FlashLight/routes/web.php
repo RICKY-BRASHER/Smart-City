@@ -6,7 +6,7 @@ use App\Http\Controllers\Process;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Layout.welcome');
 })->name('welcome');
 
 // Pages d'affichage via le contrôleur PageGestion
@@ -16,12 +16,12 @@ Route::get('/users',       [PageGestion::class, 'users'])->name('users');
 
 // Vérification du code
 Route::get('/verif_code', function () {
-    return view('code');
+    return view('Layout.code');
 })->name('verif_code');
 
 // Pages légales
-Route::get('/conditions',      function () { return view('terms');   })->name('terms');
-Route::get('/confidentialite', function () { return view('privacy'); })->name('privacy');
+Route::get('/conditions',      function () { return view('Layout.terms');   })->name('terms');
+Route::get('/confidentialite', function () { return view('Layout.privacy'); })->name('privacy');
 
 
 Route::post('/inscript_city', [Process::class, 'inscription'])->name('valid_inscription');
