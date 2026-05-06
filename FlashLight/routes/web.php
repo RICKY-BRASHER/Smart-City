@@ -56,5 +56,44 @@ Route::get('notif', function () {
     return view('Client.notif');
 })->name('notif');
 
+//route vers les pages admin
+Route::get('/accueil', function () {
+    return view('Admin.accueil');
+})->name('accueil');
+
+Route::get('/admin', function () {
+    return view('Admin.accueil');
+})->name('admin');
 
 
+Route::get('/signalement', function () {
+    return view('Admin.signalement');
+})->name('signalement');
+
+Route::get('/agents', function () {
+    return view('Admin.agents');
+})->name('agents');
+
+Route::get('/carte', function () {
+    return view('Admin.carte');
+})->name('carte');
+
+Route::get('/categories', function () {
+    return view('Admin.categories');
+})->name('categories');
+
+Route::get('/commentaires', function () {
+    return view('Admin.commentaires');
+})->name('commentaires');
+
+Route::get('/liste_users', function () {
+    return view('Admin.liste_users');
+})->name('liste_users');
+
+Route::get('/notification', function () {
+    return view('Admin.notification');
+})->name('notification');
+
+Route::get('/parametre', function () {
+    return view('Admin.parametre');
+})->name('parametre');
