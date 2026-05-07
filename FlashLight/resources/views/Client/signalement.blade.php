@@ -39,7 +39,7 @@
                             </div>
                         </div>
 
-                       <form action="">
+                       <form action="" id="signalementForm">
                             @csrf
                             <div class="mb-4">
                                 <label class="form-label">Catégorie du problème <span
@@ -48,7 +48,7 @@
                                     <label >
                                         <div class="col-6 col-md-4" onclick="selectCat(this)">
                                 
-                                            <input type="radio" name="categorie" class="d-none" />
+                                            <input type="radio" name="categorie" class="d-none" value="Etat Routier"/>
                                             <div class="cat-select-card selected"
                                                 style="border:2px solid var(--blue);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:var(--blue-xlight);transition:all .2s">
                                                 <div style="font-size:1.5rem;margin-bottom:.3rem">🛣 </div>
@@ -60,7 +60,7 @@
                                     </label>
                                     <label>
                                         <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" />
+                                            <input type="radio" name="categorie" class="d-none" value="Éclairage"/>
                                             <div class="cat-select-card"
                                                 style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
                                                 <div style="font-size:1.5rem;margin-bottom:.3rem">💡</div>
@@ -71,7 +71,7 @@
                                     </label>
                                     <label>
                                         <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" />
+                                            <input type="radio" name="categorie" class="d-none" value="Ordures"/>
                                             <div class="cat-select-card"
                                                 style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
                                                 <div style="font-size:1.5rem;margin-bottom:.3rem">🗑️</div>
@@ -82,7 +82,7 @@
                                     </label>
                                     <label>
                                         <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" />
+                                            <input type="radio" name="categorie" class="d-none" value="Fuite d'eau"/>
                                             <div class="cat-select-card"
                                                 style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
                                                 <div style="font-size:1.5rem;margin-bottom:.3rem">💧</div>
@@ -93,7 +93,7 @@
                                     </label>
                                     <label>
                                         <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" />
+                                            <input type="radio" name="categorie" class="d-none" value="Espaces verts"/>
                                             <div class="cat-select-card"
                                                 style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
                                                 <div style="font-size:1.5rem;margin-bottom:.3rem">🌲</div>
@@ -104,7 +104,7 @@
                                     </label>
                                     <label>
                                         <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" />
+                                            <input type="radio" name="categorie" class="d-none" value="Incidents"/>
                                             <div class="cat-select-card"
                                                 style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
                                                 <div style="font-size:1.5rem;margin-bottom:.3rem">🚨</div>
@@ -115,7 +115,7 @@
                                     </label>
                                     <label>
                                         <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" />
+                                            <input type="radio" name="categorie" class="d-none" value="Autre"/>
                                             <div class="cat-select-card"
                                                 style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
                                                 <div style="font-size:1.5rem;margin-bottom:.3rem">⚡</div>
@@ -144,37 +144,44 @@
                                     <label class="form-label">Quartier <span
                                             style="color:var(--red)">*</span></label>
                                     <select class="form-select" name="quartier">
-                                        <option>Akwa</option>
-                                        <option>Bepanda</option>
-                                        <option>New Bell</option>
-                                        <option>Bonamoussadi</option>
-                                        <option>Deido</option>
-                                        <option>Ndokotti</option>
+                                        <option value="">Sélectionnez un quartier</option>
+                                        <option value="Akwa">Akwa</option>
+                                        <option value="Bepanda">Bepanda</option>
+                                        <option value="New Bell">New Bell</option>
+                                        <option value="Bonamoussadi">Bonamoussadi</option>
+                                        <option value="Deido">Deido</option>
+                                        <option value="Ndokotti">Ndokotti</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Rue / Adresse <span
                                             style="color:var(--red)">*</span></label>
                                     <input type="text" class="form-control" name="adresse" placeholder="Ex : Rue Joss" />
+                                    <input type="hidden" name="latitude" id="latInput">
+                                    <input type="hidden" name="longitude" id="lngInput">
+                                    <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="getLocation()">
+                                        <i class="bi bi-geo-alt"></i> Utiliser ma position actuelle
+                                    </button>
+                                    <small id="locationStatus" class="text-muted d-block mt-1"></small>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Niveau d'urgence</label>
                                 <div class="d-flex gap-2">
                                     <label style="flex:1;cursor:pointer">
-                                        <input type="radio" name="urgence" class="d-none" />
+                                        <input type="radio" name="urgence" class="d-none" value="Basse"/>
                                         <div class="urgence-opt"
                                             style="border:2px solid var(--border);border-radius:10px;padding:.55rem;text-align:center;font-size:.78rem;font-weight:700;color:var(--green);background:#fff;cursor:pointer;transition:all .2s"
                                             onclick="selectUrgence(this,'green','#16a34a')">🟢 Basse</div>
                                     </label>
                                     <label style="flex:1;cursor:pointer">
-                                        <input type="radio" name="urgence" class="d-none" />
+                                        <input type="radio" name="urgence" class="d-none" value="Moyenne"/>
                                         <div class="urgence-opt"
                                             style="border:2px solid var(--border);border-radius:10px;padding:.55rem;text-align:center;font-size:.78rem;font-weight:700;color:var(--orange);background:#fff;cursor:pointer;transition:all .2s"
                                             onclick="selectUrgence(this,'orange','#ea580c')">🟡 Moyenne</div>
                                     </label>
                                     <label style="flex:1;cursor:pointer">
-                                        <input type="radio" name="urgence" class="d-none" checked/>
+                                        <input type="radio" name="urgence" class="d-none" value="Haute" checked/>
                                         <div class="urgence-opt selected-urgence"
                                             style="border:2px solid var(--red);border-radius:10px;padding:.55rem;text-align:center;font-size:.78rem;font-weight:700;color:var(--red);background:var(--red-light);cursor:pointer;transition:all .2s"
                                             onclick="selectUrgence(this,'red','#dc2626')">🔴 Haute</div>
@@ -198,10 +205,10 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end gap-2">
-                                <button class="btn btn-light"
+                                <button class="btn btn-light" type="button" data-bs-dismiss="modal" id="cancelBtn"
                                     style="border-radius:10px;font-weight:600;font-family:inherit">Annuler</button>
-                                <button class="btn-report" type="button"
-                                    onclick="showToast('success','Signalement envoyé avec succès !')">
+                                <button class="btn-report" type="button" id="submitBtn"
+                                    >
                                     <i class="bi bi-send-fill"></i> Envoyer le signalement
                                 </button>
                             </div>
@@ -365,6 +372,111 @@
             // Mettre à jour le texte d'aide
             $('#uploadText').text(selectedFiles.length > 0 ? `${selectedFiles.length} photo(s) prête(s)` : "Glissez vos photos ici");
         }
+        function getLocation() {
+            const status = document.getElementById('locationStatus');
+            const latInput = document.getElementById('latInput');
+            const lngInput = document.getElementById('lngInput');
+            const adresseInput = document.querySelector('input[name="adresse"]'); // Ton champ adresse
+
+            if (!navigator.geolocation) {
+                status.textContent = "La géolocalisation n'est pas supportée.";
+                return;
+            }
+
+            status.textContent = "Localisation en cours...";
+
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                latInput.value = lat;
+                lngInput.value = lng;
+
+                status.innerHTML = "Position trouvée, recherche de l'adresse...";
+
+                try {
+                    // Appel à l'API Nominatim (OpenStreetMap)
+                    const response = await fetch(`https://openstreetmap.org{lat}&lon=${lng}&zoom=18&addressdetails=1`);
+                    const data = await response.json();
+
+                    if (data.display_name) {
+                        // On extrait la rue ou le nom du lieu
+                        const road = data.address.road || data.address.pedestrian || data.address.suburb || "Adresse inconnue";
+                        const neighborhood = data.address.neighbourhood || data.address.suburb || "";
+                        
+                        adresseInput.value = road + (neighborhood ? ", " + neighborhood : "");
+                        status.innerHTML = `<span class="text-success"><i class="bi bi-check-all"></i> Localisé à : ${road}</span>`;
+                    }
+                } catch (error) {
+                    console.error("Erreur Geocoding:", error);
+                    status.innerHTML = `<span class="text-success">Position OK (Adresse non trouvée)</span>`;
+                }
+            }, (error) => {
+                status.innerHTML = `<span class="text-danger">Erreur : ${error.message}</span>`;
+            });
+        }
+
+
+
+
+        $(document).ready(function() {
+            
+            $('#cancelBtn').click(function() {
+                // Réinitialiser le formulaire
+                $('form')[0].reset();
+                selectedFiles = [];
+                renderPreviews();
+                updateInputFiles();
+            });
+            $('#submitBtn').click(function() {
+                let formData = new FormData($('#signalementForm')[0]);
+                selectedFiles.forEach((file, index) => { // Ajouter les fichiers un par un
+                    formData.append('photos[]', file);
+                });
+
+                $.ajax({
+                    url: '/submit-signalement', // Remplacez par votre URL de traitement
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        showToast('success', 'Signalement envoyé avec succès !');
+                        $('#cancelBtn').click(); // Réinitialiser le formulaire après soumission
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 422) {
+                            let errors = xhr.responseJSON.errors;
+                            
+                            // 1. Nettoyer les anciennes erreurs
+                            $('.is-invalid').removeClass('is-invalid');
+                            $('.invalid-feedback').remove();
+
+                            // 2. Afficher les nouvelles erreurs
+                            $.each(errors, function(key, messages) {
+                                // Pour les champs classiques (title, description, etc.)
+                                let input = $(`[name="${key}"]`);
+                                
+                                // Cas spécial pour les photos (car le name est photos[])
+                                if (key.includes('photos')) {
+                                    input = $('#dropZone'); // On met l'erreur sur la zone d'upload
+                                }
+
+                                input.addClass('is-invalid');
+                                
+                                // On affiche le premier message d'erreur sous le champ
+                                
+                            });
+
+                            showToast('error', 'Remplissez correctement tous les champs obligatoires.');
+                        } else {
+                            showToast('danger', 'Une erreur est survenue. Veuillez réessayer.');
+                        }
+                    },
+                });
+
+            });
+        });
 
     </script>
 @endpush

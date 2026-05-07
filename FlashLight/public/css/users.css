@@ -1911,3 +1911,14 @@
             color: var(--text-muted) !important;
             font-size: 1.2rem !important;
         }
+        /* Style pour les champs invalides */
+        .form-control.is-invalid, .form-select.is-invalid {
+            border-color: var(--red) !important;
+            background-image: none !important; /* Enlever l'icône par défaut de bootstrap si besoin */
+        }
+
+        /* Si c'est la zone d'upload qui est en erreur */
+        .upload-zone.is-invalid {
+            border: 2px dashed var(--red) !important;
+            background-color: rgba(220, 38, 38, 0.05);
+        }

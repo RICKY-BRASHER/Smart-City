@@ -8,7 +8,7 @@
                 status: "new",
                 priority: "high",
                 id: "#CF-1284",
-                color: "#dc2626"
+                color: "#2687dc"
             },
             {
                 lat: 4.0460,
@@ -117,7 +117,7 @@
                 className: '',
                 html: `<div style="
             width:16px;height:16px;border-radius:50%;
-            background:\${incident.color};
+            background:${incident.color};
             border:2.5px solid #fff;
             box-shadow:0 2px 8px rgba(0,0,0,.35);
             cursor:pointer;
@@ -145,7 +145,7 @@
             marker.bindPopup(`
         <div class="cf-popup">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-                <span style="font-family:JetBrains Mono,monospace;font-size:.72rem;color:#1a6fd4;font-weight:600">\${incident.id}</span>
+                <span style="font-family:JetBrains Mono,monospace;font-size:.72rem;color:#1a6fd4;font-weight:600">${incident.id}</span>
                 <span class="status-badge ${statusClass[incident.status]}" style="font-size:.65rem;padding:.15rem .5rem">
                     <span class="dot"></span>${statusLabel[incident.status]}
                 </span>
@@ -153,10 +153,10 @@
             <div class="cf-popup-title">${incident.title}</div>
             <div class="cf-popup-loc">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="${incident.color}"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                \${incident.loc}
+                ${incident.loc}
             </div>
             <div style="display:flex;align-items:center;gap:4px">
-                <span style="display:inline-block;background:#e8f1fc;color:#1a6fd4;border-radius:99px;padding:.15rem .5rem;font-size:.68rem;font-weight:600">\${incident.cat}</span>
+                <span style="display:inline-block;background:#e8f1fc;color:#1a6fd4;border-radius:99px;padding:.15rem .5rem;font-size:.68rem;font-weight:600">${incident.cat}</span>
             </div>
         </div>
     `, {
@@ -217,7 +217,7 @@
             setTimeout(() => profileMapInstance.invalidateSize(), 400);
         }
 
-        /*function initMiniMap() {
+        function initMiniMap() {
             if (miniMapInstance) return;
             miniMapInstance = L.map('miniMap', {
                 center: [4.0510, 9.6980],
@@ -270,7 +270,7 @@
             // Add only user's incidents (first 3 for demo)
             incidents.slice(0, 3).forEach(i => makeMarker(i).addTo(profileMapInstance));
             setTimeout(() => profileMapInstance.invalidateSize(), 300);
-        }*/
+        }
 
         // ─── Sidebar Toggle 
         const sidebar = document.getElementById('sidebar');

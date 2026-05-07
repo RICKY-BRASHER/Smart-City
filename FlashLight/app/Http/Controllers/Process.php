@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\signalement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -63,7 +64,7 @@ class Process extends Controller
             $request->session()->regenerate();
             return response()->json([
                 'success' => true,
-                'redirect' => route('welcome'),
+                'redirect' => route('home'),
             ]);
         } else {
             return response()->json([
@@ -137,5 +138,49 @@ class Process extends Controller
                 'message' => 'Utilisateur non trouvé',
             ], 404);
         }
+    }
+
+    public function sendsignalement(Request $request)
+    {
+        $request->validate([
+            'categorie' => 'required',
+            'description' => 'required',
+            'title' => 'required',
+            'quartier' => 'required',
+            'adresse' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:5048', // Validation pour les photos
+        ], [
+            'required' => 'remplissez tous les champs obligatoires',
+            'photos.*.image' => 'Chaque fichier doit être une image',
+            'photos.*.mimes' => 'Les photos doivent être au format jpeg, png, jpg ou gif',
+            'photos.*.max' => 'Chaque photo ne doit pas dépasser 5MB',
+        ]);
+
+        $photopack = [];
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $pack  = $photo->store('signalement_photos', 'public');// Stockage dans le dossier public/signalement_photos
+                $photopack[] = $pack; // Ajouter le chemin de la photo au tableau photopack
+            }
+        }
+
+        $signalement = new signalement();
+        $signalement->categorie = $request->input('categorie');
+        $signalement->titre = $request->input('title');
+        $signalement->description = $request->input('description');
+        $signalement->quartier = $request->input('quartier');
+        $signalement->adresse = $request->input('adresse');
+        $signalement->latitude = $request->input('latitude');
+        $signalement->longitude = $request->input('longitude');
+        $signalement->type_urgence = $request->input('urgence');
+        $signalement->photo = $photopack; // Stocker le tableau de chemins dans la base de données
+        $signalement->id_user = Auth::id()?? 1; // Utiliser l'ID de l'utilisateur connecté ou 1 par défaut pour les tests
+        $signalement->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Signalement envoyé avec succès',
+        ]);
     }
 }

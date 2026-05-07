@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
  
     // Ajoute ici tes autres routes protégées... 
 });
+Route::post('/submit-signalement', [Process::class, 'sendsignalement'])->name('signalement');
 // Routes pour les pages client
 Route::get('/signaler', function () {
     return view('Client.signalement');
