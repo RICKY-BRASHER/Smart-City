@@ -213,16 +213,29 @@ class Process extends Controller
 
     public function editprofil(Request $request)
     {
+        $user = auth()->user();
+
+        // 1. Vérifier si au moins un champ a changé
+        if (
+            $request->input('name') == $user->name &&
+            $request->input('ville') == $user->adresse &&
+            $request->input('telephone') == $user->telephone
+        ) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Aucune modification n\'a été détectée.'
+            ], 422); // On renvoie une erreur 422 (Unprocessable Entity)
+        }
         $request->validate([
             'name' => 'required',
-            'phone' => 'required|numeric|digits_between:9,12|unique:users,telephone,' . auth()->id(),
+            'telephone' => 'required|numeric|digits_between:9,12|unique:users,telephone,' . auth()->id(),
             'ville' => 'required',
         ], [
             'required' => 'Ce champ est obligatoire',
-            'phone.unique' => 'Ce téléphone est déjà utilisé',
+            'telephone.unique' => 'Ce téléphone est déjà utilisé',
             'email.email' => 'Veuillez entrer une adresse email valide',
-            'phone.numeric' => 'Le numéro de téléphone doit être numérique',
-            'phone.digits_between' => 'Le numéro de téléphone doit comporter entre 9 et 12 chiffres',
+            'telephone.numeric' => 'Le numéro de téléphone doit être numérique',
+            'telephone.digits_between' => 'Le numéro de téléphone doit comporter entre 9 et 12 chiffres',
         ]);
 
         $user = auth()->user();

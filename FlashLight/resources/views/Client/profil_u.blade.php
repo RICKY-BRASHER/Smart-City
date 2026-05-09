@@ -236,10 +236,30 @@
                 contentType: false,
                 success: function(response) {
                     showToast('success', 'Profil mis à jour avec succès !');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 900); 
                 },
-                error: function() {
-                    showToast('danger', 'Une erreur est survenue. Veuillez réessayer.');
+                error: function(xhr) {
+                    let errorMsg = 'Une erreur est survenue.';
+
+                    // Si Laravel renvoie une erreur (422 ou autre) avec un JSON
+                    if (xhr.responseJSON) {
+                        if (xhr.responseJSON.message) {
+                            // Affiche le message personnalisé (ex: "Aucune modification détectée")
+                            errorMsg = xhr.responseJSON.message;
+                        } else if (xhr.responseJSON.errors) {
+                            // Si c'est une erreur de validation (ex: "Le champ nom est obligatoire")
+                            // On récupère le premier message d'erreur trouvé
+                            let firstError = Object.values(xhr.responseJSON.errors)[0][0];
+                            errorMsg = firstError;
+                        }
+                    }
+
+                    showToast('error', errorMsg);
                 }
+                    
+
             });
         });
     });

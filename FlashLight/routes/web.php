@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () { // Protéger les routes qui né
         $listesignalements = \App\Models\signalement::where('id_user', auth()->user()->id)->get(); // Récupérer les signalements de l'utilisateur connecté
         return view('Client.profil_u', compact('listesignalements')); // Passer les signalements à la vue du profil
     })->name('profil_u');
-    Route::get('/edit_profil', [Process::class, 'editprofil'])->name('edit_profil');
+    Route::post('/edit_profil', [Process::class, 'editprofil'])->name('edit_profil');
     Route::get('notif', function () {
         return view('Client.notif');
     })->name('notif');
