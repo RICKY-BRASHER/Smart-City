@@ -8,7 +8,7 @@
             <h1>Mes signalements</h1>
             <p>Suivez l'avancement de vos signalements en temps réel.</p>
         </div>
-        <button class="btn-report ms-auto" onclick="goTo('signaler')"><i
+        <button class="btn-report ms-auto" onclick="window.location.href='/signaler'"><i
                 class="bi bi-plus-circle-fill"></i> Nouveau signalement</button>
     </div>
     <div class="cf-card anim-2">

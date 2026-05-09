@@ -60,12 +60,14 @@ class Process extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');
-        if (Auth::attempt($credentials, $remember)) {
-            $request->session()->regenerate();
-            return response()->json([
-                'success' => true,
-                'redirect' => route('home'),
-            ]);
+        if (Auth::attempt($credentials, $remember)) { // Authentification réussie
+            $request->session()->regenerate(); // Prévenir les attaques de session fixation
+            $user = Auth::user();// Récupérer l'utilisateur connecté
+            if ($user->role === 'admin') {
+                return response()->json(['success' => true, 'redirect' => route('accueil')]);
+            } else {
+                return response()->json(['success' => true, 'redirect' => route('home')]);
+            }
         } else {
             return response()->json([
                 'success' => false,

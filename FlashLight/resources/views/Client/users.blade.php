@@ -69,7 +69,7 @@
                             <a href="{{ route('mes_signalements') }}" class="nav-link-cf {{ Request::routeIs('mes_signalements') ? 'active' : '' }}" data-section="mes-signalements">
                                 <i class="bi bi-flag-fill nav-icon"></i>
                                 <span class="nav-label">Mes signalements</span>
-                                <span class="nav-badge">3</span>
+                                <span class="nav-badge">2</span>
                             </a>
                         </li>
                         <li class="nav-item-cf">
