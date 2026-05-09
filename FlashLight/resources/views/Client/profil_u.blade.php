@@ -1,5 +1,5 @@
 @extends('Client.users')
-@section('title','Liste des signalements')
+@section('title','Mon profil - Smart City')
 @section('content')
 <div id="profilSection" class="page-section active">
     <div class="page-header anim-1">
@@ -9,29 +9,33 @@
     <div class="row g-3 anim-2">
         <div class="col-lg-4">
             <div class="cf-card text-center" style="padding:2rem 1.5rem">
-                <div class="profile-avatar-lg mx-auto mb-3">JM</div>
-                <div style="font-size:1.15rem;font-weight:800;color:var(--text-dark)">Jean Mbarga</div>
+                <div class="profile-avatar-lg mx-auto mb-3">@php
+                            $words = explode(' ', Auth::user()->name);
+                            $initials = strtoupper(substr($words[0], 0, 1) . (isset($words[1]) ? substr($words[1], 0, 1) : ''));
+                        @endphp
+                        {{ $initials }}</div>
+                <div style="font-size:1.15rem;font-weight:800;color:var(--text-dark)">{{ auth()->user()->name }}</div>
                 <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:1rem">
-                    jean.mbarga@gmail.com</div>
+                    {{ auth()->user()->email }}</div>
                 <span
                     style="background:var(--blue-light);color:var(--blue);font-size:.72rem;font-weight:700;border-radius:99px;padding:.25rem .75rem"><i
                         class="bi bi-patch-check-fill"></i> Citoyen vérifié</span>
                 <div class="row g-2 mt-3">
                     <div class="col-4">
                         <div class="profile-stat">
-                            <div class="profile-stat-val">12</div>
+                            <div class="profile-stat-val">{{ auth()->user()->signalements->count() }}</div>
                             <div class="profile-stat-lbl">Signalements</div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="profile-stat">
-                            <div class="profile-stat-val">8</div>
+                            <div class="profile-stat-val">{{ auth()->user()->signalements->where('statut', 'résolu')->count() }}    </div>
                             <div class="profile-stat-lbl">Résolus</div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="profile-stat">
-                            <div class="profile-stat-val" style="color:var(--accent)">47</div>
+                            <div class="profile-stat-val" style="color:var(--accent)">0</div>
                             <div class="profile-stat-lbl">Points</div>
                         </div>
                     </div>
@@ -62,42 +66,38 @@
                     <div id="profileMap" class="profile-map-container"></div>
                 </div>
             </div>
-
-            <div class="cf-card mb-3">
-                <div class="cf-card-header">
-                    <div class="card-icon-header"><i class="bi bi-person-fill"></i></div>
-                    <h5>Informations personnelles</h5>
-                    <button class="btn-add ms-auto"
-                        onclick="showToast('info','Fonctionnalité à venir !')"><i
-                            class="bi bi-pencil-fill"></i> Modifier</button>
-                </div>
-                <div class="cf-card-body">
-                    <div class="row g-3">
-                        <div class="col-md-6"><label class="form-label">Nom</label><input type="text"
-                                class="form-control" value="Mbarga" readonly
-                                style="background:var(--bg)" /></div>
-                        <div class="col-md-6"><label class="form-label">Prénom</label><input
-                                type="text" class="form-control" value="Jean" readonly
-                                style="background:var(--bg)" /></div>
-                        <div class="col-md-6"><label class="form-label">Email</label><input
-                                type="email" class="form-control" value="jean.mbarga@gmail.com"
-                                readonly style="background:var(--bg)" /></div>
-                        <div class="col-md-6"><label class="form-label">Téléphone</label><input
-                                type="text" class="form-control" value="6 50 50 50 50" readonly
-                                style="background:var(--bg)" /></div>
-                        <div class="col-md-6"><label class="form-label">Quartier</label><input
-                                type="text" class="form-control" value="Akwa" readonly
-                                style="background:var(--bg)" /></div>
-                        <div class="col-md-6"><label class="form-label">Ville</label><input
-                                type="text" class="form-control" value="Douala" readonly
-                                style="background:var(--bg)" /></div>
-                        <div class="col-md-6"><label class="form-label">Membre depuis</label><input
-                                type="text" class="form-control" value="Janvier 2025" readonly
-                                style="background:var(--bg)" /></div>
+            <form id="profileForm">
+                @csrf
+                <div class="cf-card mb-3">
+                    <div class="cf-card-header">
+                        <div class="card-icon-header"><i class="bi bi-person-fill"></i></div>
+                        <h5>Informations personnelles</h5>
+                        <button class="btn-add ms-auto" type="button" id="editProfileBtn"><i
+                                class="bi bi-pencil-fill"></i> Modifier</button>
                     </div>
+                    
+                    <div class="cf-card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label">Nom</label><input type="text" name="name"
+                                    class="form-control" value="{{ auth()->user()->name }}" 
+                                    style="background:var(--bg)" /></div>
+                            <div class="col-md-6"><label class="form-label">Ville</label><input name="ville"
+                                    type="text" class="form-control" value="{{ auth()->user()->adresse }}" 
+                                    style="background:var(--bg)" /></div>
+                            <div class="col-md-6"><label class="form-label">Email</label><input readonly 
+                                    type="email" class="form-control" value="{{ auth()->user()->email }}" 
+                                    style="background:var(--bg)" /></div>
+                            <div class="col-md-6"><label class="form-label">Téléphone</label><input name="telephone"
+                                    type="number" class="form-control" value="{{ auth()->user()->telephone }}" 
+                                    style="background:var(--bg)" /></div>
+                            <div class="col-md-6"><label class="form-label">Membre depuis</label><input name="membre_depuis"
+                                    type="text" class="form-control" value="Janvier 2025" readonly
+                                    style="background:var(--bg)" /></div>
+                        </div>
+                    </div>
+                    
                 </div>
-            </div>
-
+            </form>
             <!--Préférences (Mode sombre + Langue) -->
             <div class="cf-card">
                 <div class="cf-card-header">
@@ -204,3 +204,44 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    // Initialiser la carte dans le profil
+    var profileMap = L.map('profileMap').setView([48.8566, 2.3522], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(profileMap);
+
+    // Ajouter les signalements de l'utilisateur sur la carte
+    @foreach($listesignalements as $signalement)
+        L.marker([{{ $signalement->latitude }}, {{ $signalement->longitude }}]).addTo(profileMap)
+            .bindPopup('<strong>{{ $signalement->titre }}</strong><br>{{ $signalement->etat }}');
+    @endforeach
+
+    $(document).ready(function() {
+        // Vérifier les préférences de thème sombre
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            $('#darkModeToggle').prop('checked', true);
+            toggleDarkMode(true);
+        }
+        $('#editProfileBtn').click(function() {
+            
+            var formData = new FormData($('#profileForm')[0]);
+            $.ajax({
+                url: '{{ route("edit_profil") }}',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    showToast('success', 'Profil mis à jour avec succès !');
+                },
+                error: function() {
+                    showToast('danger', 'Une erreur est survenue. Veuillez réessayer.');
+                }
+            });
+        });
+    });
+</script>
+@endpush

@@ -441,16 +441,16 @@
                     </label>
                     <div class="input-wrapper">
                         <select name="ville" id="ville" class="form-control-cf @error('phone') is-invalid @enderror">
-                            <option value="L">Littoral</option>
-                            <option value="C">Centre</option>
-                            <option value="E">Est</option>
-                            <option value="O">Ouest</option>
-                            <option value="EN">Extreme Nord</option>
-                            <option value="N">Nord</option>
-                            <option value="A">Adamaoua</option>
-                            <option value="NO">Nord-Ouest</option>
-                            <option value="S">Sud</option>
-                            <option value="SE">Sud-Est</option>
+                            <option value="Littoral">Littoral</option>
+                            <option value="Centre">Centre</option>
+                            <option value="Est">Est</option>
+                            <option value="Ouest">Ouest</option>
+                            <option value="Extreme Nord">Extreme Nord</option>
+                            <option value="Nord">Nord</option>
+                            <option value="Adamaoua">Adamaoua</option>
+                            <option value="Nord-Ouest">Nord-Ouest</option>
+                            <option value="Sud">Sud</option>
+                            <option value="Sud-Est">Sud-Est</option>
                         </select>
                     </div>
                 </div>

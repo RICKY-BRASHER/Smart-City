@@ -4,16 +4,16 @@
 <div id="accueilSection" class="page-section active">
     <div class="hero-banner anim-1">
         <div class="hero-illus">🏙️</div>
-        <div class="hero-title">Bonjour, Jean 👋</div>
+        <div class="hero-title">Bonjour, {{ Auth::user()->name }} 👋</div>
         <div class="hero-sub">Signalez un problème dans votre quartier et contribuez à améliorer votre
             ville.</div>
         <div class="hero-stats">
             <div>
-                <div class="hero-stat-val">12</div>
+                <div class="hero-stat-val">{{ Auth::user()->signalements->count() }}</div>
                 <div class="hero-stat-lbl">Mes signalements</div>
             </div>
             <div>
-                <div class="hero-stat-val">8</div>
+                <div class="hero-stat-val">{{ Auth::user()->signalements->where('statut', 'résolu')->count() }}</div>
                 <div class="hero-stat-lbl">Résolus</div>
             </div>
             <div>
@@ -30,7 +30,7 @@
         <div class="col-6 col-xl-3 anim-2">
             <div class="stat-card blue">
                 <div class="stat-icon blue"><i class="bi bi-flag-fill"></i></div>
-                <div class="stat-val">12</div>
+                <div class="stat-val">{{ Auth::user()->signalements->count() }}</div>
                 <div class="stat-lbl">Mes signalements</div>
                 <span class="stat-trend up"><i class="bi bi-arrow-up-short"></i> +2 ce mois</span>
             </div>
@@ -38,7 +38,7 @@
         <div class="col-6 col-xl-3 anim-2">
             <div class="stat-card green">
                 <div class="stat-icon green"><i class="bi bi-check-circle-fill"></i></div>
-                <div class="stat-val">8</div>
+                <div class="stat-val">{{ Auth::user()->signalements->where('statut', 'résolu')->count() }}</div>
                 <div class="stat-lbl">Problèmes résolus</div>
                 <span class="stat-trend up"><i class="bi bi-arrow-up-short"></i> +1 cette
                     semaine</span>
@@ -47,7 +47,7 @@
         <div class="col-6 col-xl-3 anim-3">
             <div class="stat-card orange">
                 <div class="stat-icon orange"><i class="bi bi-hourglass-split"></i></div>
-                <div class="stat-val">3</div>
+                <div class="stat-val">{{ Auth::user()->signalements->where('statut', 'en attente')->count() }}</div>
                 <div class="stat-lbl">En attente</div>
                 <span class="stat-trend flat"><i class="bi bi-dash"></i> Stable</span>
             </div>
@@ -55,7 +55,7 @@
         <div class="col-6 col-xl-3 anim-4">
             <div class="stat-card red">
                 <div class="stat-icon red"><i class="bi bi-star-fill"></i></div>
-                <div class="stat-val">47</div>
+                <div class="stat-val">{{ Auth::user()->signalements->where('statut', 'résolu')->count() }}</div>
                 <div class="stat-lbl">Points citoyen</div>
                 <span class="stat-trend up"><i class="bi bi-arrow-up-short"></i> +5 pts</span>
             </div>
@@ -144,7 +144,7 @@
                 <div class="cf-card-header">
                     <div class="card-icon-header"><i class="bi bi-map-fill"></i></div>
                     <h5>Carte de mon quartier</h5>
-                    <a href="#" onclick="goTo('carte')"
+                    <a href="{{ route('carte_user') }}" 
                         style="font-size:.78rem;color:var(--blue);font-weight:600;text-decoration:none;margin-left:auto">Agrandir</a>
                 </div>
                 <div class="cf-card-body" style="padding-bottom:1rem">

@@ -48,100 +48,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><span class="incident-id">#CF-1284</span></td>
-                        <td>
-                            <div style="font-weight:600;color:var(--text-dark);font-size:.87rem">
-                                Nid-de-poule profond</div>
-                            <div style="font-size:.75rem;color:var(--text-muted)"><i class="bi bi-geo-alt"
-                                    style="font-size:.7rem"></i> Rue Joss, Akwa
-                            </div>
-                        </td>
-                        <td><span class="cat-pill">🕳️ Nid-de-poule</span></td>
-                        <td><span class="status-badge new"><span class="dot"></span>Nouveau</span>
-                        </td>
-                        <td><span class="prio high">● Haute</span></td>
-                        <td><span style="font-size:.78rem;color:var(--text-muted)">Il y a 4 min</span>
-                        </td>
-                        <td>
-                            <div class="d-flex gap-1"><button class="tbl-btn view" data-bs-toggle="modal"
-                                    data-bs-target="#viewSignalModal"><i
-                                        class="bi bi-eye-fill"></i></button><button class="tbl-btn del"
-                                    onclick="showToast('error','Signalement supprimé !')"><i
-                                        class="bi bi-trash-fill"></i></button></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="incident-id">#CF-1275</span></td>
-                        <td>
-                            <div style="font-weight:600;color:var(--text-dark);font-size:.87rem">
-                                Lampadaire éteint</div>
-                            <div style="font-size:.75rem;color:var(--text-muted)"><i class="bi bi-geo-alt"
-                                    style="font-size:.7rem"></i> Bd de la
-                                Liberté
-                            </div>
-                        </td>
-                        <td><span class="cat-pill">💡 Éclairage</span></td>
-                        <td><span class="status-badge progress"><span class="dot"></span>En
-                                cours</span>
-                        </td>
-                        <td><span class="prio medium">● Moyenne</span></td>
-                        <td><span style="font-size:.78rem;color:var(--text-muted)">Il y a 2
-                                jours</span>
-                        </td>
-                        <td>
-                            <div class="d-flex gap-1"><button class="tbl-btn view" data-bs-toggle="modal"
-                                    data-bs-target="#viewSignalModal"><i
-                                        class="bi bi-eye-fill"></i></button><button class="tbl-btn del"
-                                    onclick="showToast('error','Signalement supprimé !')"><i
-                                        class="bi bi-trash-fill"></i></button></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="incident-id">#CF-1268</span></td>
-                        <td>
-                            <div style="font-weight:600;color:var(--text-dark);font-size:.87rem">Fuite
-                                d'eau importante</div>
-                            <div style="font-size:.75rem;color:var(--text-muted)"><i class="bi bi-geo-alt"
-                                    style="font-size:.7rem"></i> Carrefour
-                                Ndokotti</div>
-                        </td>
-                        <td><span class="cat-pill">💧 Fuite d'eau</span></td>
-                        <td><span class="status-badge resolved"><span class="dot"></span>Résolu</span>
-                        </td>
-                        <td><span class="prio high">● Haute</span></td>
-                        <td><span style="font-size:.78rem;color:var(--text-muted)">Hier, 14h32</span>
-                        </td>
-                        <td>
-                            <div class="d-flex gap-1"><button class="tbl-btn view" data-bs-toggle="modal"
-                                    data-bs-target="#viewSignalModal"><i
-                                        class="bi bi-eye-fill"></i></button><button class="tbl-btn del"
-                                    onclick="showToast('error','Signalement supprimé !')"><i
-                                        class="bi bi-trash-fill"></i></button></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="incident-id">#CF-1251</span></td>
-                        <td>
-                            <div style="font-weight:600;color:var(--text-dark);font-size:.87rem">Dépôt
-                                sauvage d'ordures</div>
-                            <div style="font-size:.75rem;color:var(--text-muted)"><i class="bi bi-geo-alt"
-                                    style="font-size:.7rem"></i> Rue Castelnau
-                            </div>
-                        </td>
-                        <td><span class="cat-pill">🗑️ Ordures</span></td>
-                        <td><span class="status-badge resolved"><span class="dot"></span>Résolu</span>
-                        </td>
-                        <td><span class="prio low">● Basse</span></td>
-                        <td><span style="font-size:.78rem;color:var(--text-muted)">13 Avr.</span></td>
-                        <td>
-                            <div class="d-flex gap-1"><button class="tbl-btn view" data-bs-toggle="modal"
-                                    data-bs-target="#viewSignalModal"><i
-                                        class="bi bi-eye-fill"></i></button><button class="tbl-btn del"
-                                    onclick="showToast('error','Signalement supprimé !')"><i
-                                        class="bi bi-trash-fill"></i></button></div>
-                        </td>
-                    </tr>
+                    @foreach($listesignalements as $signalement)
+                        <tr>
+                            <td ><span class="incident-id">{{ $signalement->id_signalement }}</span></td>
+                            <td><div class="incident-title">{{ $signalement->titre }}</div></td>
+                            <td>{{ $signalement->categorie->nom_categorie }}</td>
+                            <td><span class="status in-progress">{{ $signalement->etat }}</span></td>
+                            <td><span class="priority medium">{{ $signalement->type_urgence }}</span></td>
+                            <td>{{ $signalement->created_at->format('d/m/Y') }}</td>
+                            <td>
+                                <div class="d-flex gap-1"><button class="tbl-btn view" data-bs-toggle="modal"
+                                                        data-bs-target="#viewIncidentModal"><i
+                                                            class="bi bi-eye-fill"></i></button><button class="tbl-btn edit"
+                                                        data-bs-toggle="modal" data-bs-target="#editIncidentModal"><i
+                                                            class="bi bi-pencil-fill"></i></button><button class="tbl-btn del"
+                                                        data-bs-toggle="modal" data-bs-target="#deleteIncidentModal"><i
+                                                            class="bi bi-trash-fill"></i></button></div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

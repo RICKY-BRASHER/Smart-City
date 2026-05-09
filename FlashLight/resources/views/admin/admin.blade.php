@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li class="nav-item-cf">
-                        <a href="{{ route('signalement') }}" class="nav-link-cf {{ Request::routeIs('signalement') ? 'active' : '' }}" data-section="signalements">
+                        <a href="{{ route('voir_signalement') }}" class="nav-link-cf {{ Request::routeIs('voir_signalement') ? 'active' : '' }}" data-section="signalements">
                             <i class="bi bi-flag-fill nav-icon"></i>
                             <span class="nav-label">Signalements</span>
                             <span class="nav-badge">24</span>
@@ -73,19 +73,19 @@
                         </a>
                     </li>
                     <li class="nav-item-cf">
-                        <a href="{{ route('agents') }}" class="nav-link-cf" data-section="agents">
+                        <a href="{{ route('agents') }}" class="nav-link-cf {{ Request::routeIs('agents') ? 'active' : '' }}" data-section="agents">
                             <i class="bi bi-person-workspace nav-icon"></i>
                             <span class="nav-label">Agents terrain</span>
                         </a>
                     </li>
                     <li class="nav-item-cf">
-                        <a href="{{ route('categories') }}" class="nav-link-cf" data-section="categories">
+                        <a href="{{ route('categories') }}" class="nav-link-cf {{ Request::routeIs('categories') ? 'active' : '' }}" data-section="categories">
                             <i class="bi bi-tags-fill nav-icon"></i>
                             <span class="nav-label">Catégories</span>
                         </a>
                     </li>
                     <li class="nav-item-cf">
-                        <a href="{{route('commentaires')}}" class="nav-link-cf" data-section="commentaires">
+                        <a href="{{route('commentaires')}}" class="nav-link-cf {{ Request::routeIs('commentaires') ? 'active' : '' }}" data-section="commentaires">
                             <i class="bi bi-chat-dots-fill nav-icon"></i>
                             <span class="nav-label">Commentaires</span>
                             <span class="nav-badge">7</span>
@@ -93,19 +93,19 @@
                     </li>
                     <li class="sidebar-section-title">Système</li>
                     <li class="nav-item-cf">
-                        <a href="{{route('notification')}}" id="notif" class="nav-link-cf" data-section="notifications">
+                        <a href="{{route('notification')}}" id="notif" class="nav-link-cf {{ Request::routeIs('notification') ? 'active' : '' }}" data-section="notifications">
                             <i class="bi bi-bell-fill nav-icon"></i>
                             <span class="nav-label">Notifications</span>
                         </a>
                     </li>
                     <li class="nav-item-cf">
-                        <a href="{{route('parametre')}}" class="nav-link-cf" data-section="parametres">
+                        <a href="{{route('parametre')}}" class="nav-link-cf {{ Request::routeIs('parametre') ? 'active' : '' }}" data-section="parametres">
                             <i class="bi bi-gear-fill nav-icon"></i>
                             <span class="nav-label">Paramètres</span>
                         </a>
                     </li>
                     <li class="nav-item-cf">
-                        <a href="#" class="nav-link-cf" data-section="roles">
+                        <a href="#" class="nav-link-cf {{ Request::routeIs('roles') ? 'active' : '' }}" data-section="roles">
                             <i class="bi bi-shield-lock-fill nav-icon"></i>
                             <span class="nav-label">Rôles &amp; Accès</span>
                         </a>

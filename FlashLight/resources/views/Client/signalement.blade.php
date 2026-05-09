@@ -42,90 +42,36 @@
                        <form action="" id="signalementForm">
                             @csrf
                             <div class="mb-4">
-                                <label class="form-label">Catégorie du problème <span
-                                        style="color:var(--red)">*</span></label>
-                                <div class="row ">
-                                    <label >
-                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                
-                                            <input type="radio" name="categorie" class="d-none" value="Etat Routier"/>
-                                            <div class="cat-select-card selected"
-                                                style="border:2px solid var(--blue);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:var(--blue-xlight);transition:all .2s">
-                                                <div style="font-size:1.5rem;margin-bottom:.3rem">🛣 </div>
-                                                <div style="font-size:.78rem;font-weight:700;color:var(--blue)">
-                                                    Etat Routier</div>
-                                            </div>
-                                            
+                                <label class="form-label">Catégorie du problème <span style="color:var(--red)">*</span></label>
+                                <div class="row g-3">
+                                    @foreach($categories as $categorie)
+                                        <div class="col-6 col-md-4">
+                                            <label class="w-100" onclick="selectCat(this)" style="cursor:pointer">
+                                                <!-- On coche le premier radio par défaut -->
+                                                <input type="radio" name="categorie" class="d-none" 
+                                                    value="{{ $categorie->id_categorie }}" 0
+                                                    {{ $loop->first ? 'checked' : '' }} />
+                                                
+                                                <div class="cat-select-card {{ $loop->first ? 'selected' : '' }}"
+                                                    style="border:2px solid {{ $loop->first ? 'var(--blue)' : 'var(--border)' }}; 
+                                                        border-radius:12px; padding:.8rem; text-align:center; 
+                                                        background:{{ $loop->first ? 'var(--blue-xlight)' : '#fff' }}; 
+                                                        transition:all .2s">
+                                                    
+                                                    <div style="font-size:1.5rem; margin-bottom:.3rem">
+                                                        ⚠️
+                                                    </div>
+                                                    
+                                                    <div style="font-size:.78rem; font-weight:700; color:{{ $loop->first ? 'var(--blue)' : 'var(--text-mid)' }}">
+                                                        {{ $categorie->nom_categorie }}
+                                                    </div>
+                                                </div>
+                                            </label>
                                         </div>
-                                    </label>
-                                    <label>
-                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" value="Éclairage"/>
-                                            <div class="cat-select-card"
-                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
-                                                <div style="font-size:1.5rem;margin-bottom:.3rem">💡</div>
-                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
-                                                    Éclairage</div>
-                                            </div>
-                                        </div>
-                                    </label>
-                                    <label>
-                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" value="Ordures"/>
-                                            <div class="cat-select-card"
-                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
-                                                <div style="font-size:1.5rem;margin-bottom:.3rem">🗑️</div>
-                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
-                                                    Ordures</div>
-                                            </div>
-                                        </div>
-                                    </label>
-                                    <label>
-                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" value="Fuite d'eau"/>
-                                            <div class="cat-select-card"
-                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
-                                                <div style="font-size:1.5rem;margin-bottom:.3rem">💧</div>
-                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
-                                                    Fuite d'eau</div>
-                                            </div>
-                                        </div>
-                                    </label>
-                                    <label>
-                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" value="Espaces verts"/>
-                                            <div class="cat-select-card"
-                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
-                                                <div style="font-size:1.5rem;margin-bottom:.3rem">🌲</div>
-                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
-                                                    Espaces verts</div>
-                                            </div>
-                                        </div>
-                                    </label>
-                                    <label>
-                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" value="Incidents"/>
-                                            <div class="cat-select-card"
-                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
-                                                <div style="font-size:1.5rem;margin-bottom:.3rem">🚨</div>
-                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
-                                                    Incidents</div>
-                                            </div>
-                                        </div>
-                                    </label>
-                                    <label>
-                                        <div class="col-6 col-md-4" onclick="selectCat(this)">
-                                            <input type="radio" name="categorie" class="d-none" value="Autre"/>
-                                            <div class="cat-select-card"
-                                                style="border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;background:#fff;transition:all .2s">
-                                                <div style="font-size:1.5rem;margin-bottom:.3rem">⚡</div>
-                                                <div style="font-size:.78rem;font-weight:700;color:var(--text-mid)">
-                                                    Autre</div>
-                                            </div>
-                                        </div>
-                                    </label>
+                                    @endforeach
                                 </div>
                             </div>
+
 
                             <div class="mb-3">
                                 <label class="form-label">Titre du signalement <span
@@ -165,7 +111,7 @@
                                     <small id="locationStatus" class="text-muted d-block mt-1"></small>
                                 </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3 ">
                                 <label class="form-label">Niveau d'urgence</label>
                                 <div class="d-flex gap-2">
                                     <label style="flex:1;cursor:pointer">
@@ -188,7 +134,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="mb-4">
+                            <div class="mb-4" >
                                 <label class="form-label">Photo(s) du problème</label>
                                 <input type="file" id="photoInput" name="photos[]" multiple accept="image/*" class="d-none">
                                 <div class="upload-zone" id="dropZone">
@@ -433,7 +379,7 @@
                 selectedFiles.forEach((file, index) => { // Ajouter les fichiers un par un
                     formData.append('photos[]', file);
                 });
-
+                $('#submitBtn').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Envoi...');
                 $.ajax({
                     url: '/submit-signalement', // Remplacez par votre URL de traitement
                     method: 'POST',
@@ -441,34 +387,41 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        showToast('success', 'Signalement envoyé avec succès !');
-                        $('#cancelBtn').click(); // Réinitialiser le formulaire après soumission
+                        setTimeout(() => {
+                            $('#submitBtn').prop('disabled', false).html('<i class="bi bi-send-fill"></i> Envoyer le signalement');
+                            showToast('success', 'Signalement envoyé avec succès !');
+                            
+                        }, 1000);
                     },
                     error: function(xhr) {
                         if (xhr.status === 422) {
                             let errors = xhr.responseJSON.errors;
                             
-                            // 1. Nettoyer les anciennes erreurs
-                            $('.is-invalid').removeClass('is-invalid');
-                            $('.invalid-feedback').remove();
+                            
+                            setTimeout(() => {
+                                // 1. Nettoyer les anciennes erreurs
+                                $('.is-invalid').removeClass('is-invalid');
+                                $('.invalid-feedback').remove();
 
-                            // 2. Afficher les nouvelles erreurs
-                            $.each(errors, function(key, messages) {
-                                // Pour les champs classiques (title, description, etc.)
-                                let input = $(`[name="${key}"]`);
-                                
-                                // Cas spécial pour les photos (car le name est photos[])
-                                if (key.includes('photos')) {
-                                    input = $('#dropZone'); // On met l'erreur sur la zone d'upload
-                                }
+                                // 2. Afficher les nouvelles erreurs
+                                $.each(errors, function(key, messages) {
+                                    // Pour les champs classiques (title, description, etc.)
+                                    let input = $(`[name="${key}"]`);
+                                    
+                                    // Cas spécial pour les photos (car le name est photos[])
+                                    if (key.includes('photos')) {
+                                        input = $('#dropZone'); // On met l'erreur sur la zone d'upload
+                                    }
 
-                                input.addClass('is-invalid');
-                                
-                                // On affiche le premier message d'erreur sous le champ
-                                
-                            });
-
-                            showToast('error', 'Remplissez correctement tous les champs obligatoires.');
+                                    input.addClass('is-invalid');
+                                    
+                                    // On affiche le premier message d'erreur sous le champ
+                                    
+                                });
+                                $('#submitBtn').prop('disabled', false).html('<i class="bi bi-send-fill"></i> Envoyer le signalement');
+                                $('.is-invalid:first').focus(); // Focus sur le premier champ en erreur
+                                showToast('error', 'Remplissez correctement tous les champs obligatoires.');
+                            }, 1000); // Nettoie les erreurs après 2 secondes
                         } else {
                             showToast('danger', 'Une erreur est survenue. Veuillez réessayer.');
                         }
@@ -477,6 +430,19 @@
 
             });
         });
+        function selectCat(element) {
+            // On remet toutes les cartes en style "non-sélectionné"
+            $('.cat-select-card').css({'border': '2px solid var(--border)', 'background': '#fff'});
+            $('.cat-select-card div:last-child').css('color', 'var(--text-mid)');
+
+            // On applique le style "Bleu" à la carte contenue dans le label cliqué
+            $(element).find('.cat-select-card').css({
+                'border': '2px solid var(--blue)',
+                'background': 'var(--blue-xlight)'
+            });
+            $(element).find('div:last-child').css('color', 'var(--blue)');
+        }
+
 
     </script>
 @endpush

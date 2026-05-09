@@ -189,7 +189,7 @@
                 $('#full-code').val(code);
             }
 
-            $('#otp-form').on('submit', function(e) {
+            $('#otp-form').on('submit', function(e) { // Interception du submit pour AJAX
                 e.preventDefault();
                 $('#code_error').hide().text('');
                 $('.otp-inputs input').removeClass('is-invalid');

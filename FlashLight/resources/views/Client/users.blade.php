@@ -96,12 +96,18 @@
                 </nav>
 
                 <div class="sidebar-user">
-                    <div class="user-avatar">JM</div>
-                    <div class="user-info">
-                        <div class="user-name">Jean Mbarga</div>
-                        <div class="user-role">Citoyen · Akwa, Douala</div>
+                    <div class="user-avatar">
+                        @php
+                            $words = explode(' ', Auth::user()->name);
+                            $initials = strtoupper(substr($words[0], 0, 1) . (isset($words[1]) ? substr($words[1], 0, 1) : ''));
+                        @endphp
+                        {{ $initials }}
                     </div>
-                    <a href="#" title="Déconnexion"
+                    <div class="user-info">
+                        <div class="user-name">{{ Auth::user()->name }}</div>
+                        <div class="user-role">Citoyen · {{ Auth::user()->adresse }}</div>
+                    </div>
+                    <a href="{{ route('deconnexion') }}" title="Déconnexion"
                         style="color:rgba(255,255,255,.3);font-size:1rem;text-decoration:none;transition:color .2s"
                         onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.3)'">
                         <i class="bi bi-box-arrow-right"></i>
@@ -118,7 +124,7 @@
                     <div class="topbar-breadcrumb">
                         <i class="bi bi-house-fill" style="font-size:.75rem"></i>
                         <span>/</span>
-                        <span class="current" id="currentPageTitle">Accueil</span>
+                        <span class="current" id="currentPageTitle">@yield('title')</span>
                     </div>
                     <div class="topbar-search">
                         <i class="bi bi-search search-icon"></i>
@@ -129,7 +135,13 @@
                             <i class="bi bi-bell-fill"></i>
                             <span class="badge-dot"></span>
                         </button>
-                        <div class="topbar-avatar" title="Mon profil" onclick="goTo('profil')">JM</div>
+                        <div class="topbar-avatar" title="Mon profil" onclick="goTo('profil')">
+                            @php
+                                $words = explode(' ', Auth::user()->name);
+                                $initials = strtoupper(substr($words[0], 0, 1) . (isset($words[1]) ? substr($words[1], 0, 1) : ''));
+                            @endphp
+                            {{ $initials }}
+                        </div>
                     </div>
                 </header>
 

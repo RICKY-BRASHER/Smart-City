@@ -11,7 +11,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->redirectGuestsTo('/connexion'); 
+        $middleware->redirectUsersTo('/home');
+        $middleware->alias([
+        'mailcontrol' => \App\Http\Middleware\MailControl::class, // Vérifie bien le nom de la classe
+        'mailacess' => \App\Http\Middleware\MailAcess::class, // Vérifie bien le nom de la classe
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

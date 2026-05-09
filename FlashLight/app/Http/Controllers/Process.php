@@ -73,6 +73,14 @@ class Process extends Controller
             ], 401);
         }
     }
+
+    public function deconnexion(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('welcome');
+    }
     public function verifycode(Request $request)
     {
         $request->validate([
@@ -139,6 +147,25 @@ class Process extends Controller
             ], 404);
         }
     }
+    public function offcode(Request $request)
+    {
+        $email = session('email_attente');
+        $user = User::where('email', $email)->first();
+        if ($user) {
+            $user->verification_code = null;
+            $user->code_expires_at = null;
+            $user->save();
+            return response()->json([
+                'success' => true,
+                'message' => 'Code de vérification désactivé',
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Utilisateur non trouvé',
+            ], 404);
+        }
+    }
 
     public function sendsignalement(Request $request)
     {
@@ -167,7 +194,7 @@ class Process extends Controller
         }
 
         $signalement = new signalement();
-        $signalement->categorie = $request->input('categorie');
+        $signalement->id_categorie = $request->input('categorie');
         $signalement->titre = $request->input('title');
         $signalement->description = $request->input('description');
         $signalement->quartier = $request->input('quartier');
@@ -181,6 +208,32 @@ class Process extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Signalement envoyé avec succès',
+        ]);
+    }
+
+    public function editprofil(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required|numeric|digits_between:9,12|unique:users,telephone,' . auth()->id(),
+            'ville' => 'required',
+        ], [
+            'required' => 'Ce champ est obligatoire',
+            'phone.unique' => 'Ce téléphone est déjà utilisé',
+            'email.email' => 'Veuillez entrer une adresse email valide',
+            'phone.numeric' => 'Le numéro de téléphone doit être numérique',
+            'phone.digits_between' => 'Le numéro de téléphone doit comporter entre 9 et 12 chiffres',
+        ]);
+
+        $user = auth()->user();
+        $user->name = $request->input('name');
+        $user->adresse = $request->input('ville');
+        $user->telephone = $request->input('telephone');
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Profil mis à jour avec succès',
         ]);
     }
 }

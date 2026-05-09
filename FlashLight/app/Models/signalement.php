@@ -29,4 +29,8 @@ class signalement extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+    public function categorie()
+    {
+        return $this->belongsTo(categorie::class, 'id_categorie');
+    }
 }
